@@ -1,66 +1,82 @@
-# Smart Support Ticket Workflow
+<div align="center">
+  <img src="https://img.icons8.com/color/96/000000/bot.png" width="80" alt="Bot Icon" />
+  <h1>Smart Support Ticket Workflow</h1>
+  <p>An AI-powered React web application that automates customer support ticket processing through a <strong>3-step LLM workflow</strong> — running directly in your browser.</p>
+  
+  <p>
+    <a href="#features">Features</a> •
+    <a href="#how-it-works">How It Works</a> •
+    <a href="#screenshots">Screenshots</a> •
+    <a href="#installation">Installation</a>
+  </p>
 
-A React web app that processes customer support tickets through a **3-step AI workflow** — classify, respond, and decide escalation — all running directly in the browser.
+  <p>
+    <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
+    <img src="https://img.shields.io/badge/Mistral_7B-4A90E2?style=for-the-badge&logoColor=white" alt="AI Model" />
+    <img src="https://img.shields.io/badge/OpenRouter-FF5A5F?style=for-the-badge&logoColor=white" alt="API" />
+  </p>
+</div>
 
-## Tech Stack
+---
 
-- **Frontend:** React.js + Vanilla CSS  
-- **LLM:** Mistral 7B Instruct via OpenRouter API  
-- **Architecture:** No backend — API calls made directly from the browser
+## ✨ Features
 
-## How It Works
+- **No Backend Architecture** — Direct, secure API calls to OpenRouter (`mistralai/mistral-7b-instruct-v0.1`) straight from the frontend.
+- **Intelligent Classification** — Automatically categorizes tickets and ranks them by urgency level.
+- **Context-Aware Replies** — Generates human-like, empathetic responses that adapt the tone based on the ticket's severity.
+- **Auto-Escalation Engine** — Hard-coded business logic forces high-urgency tickets up to human agents, preventing critical misses.
+- **Live Session Log** — A persistent, expandable history of all AI processing events available right below the form.
 
-A support agent enters a customer ticket, and the app runs it through 3 sequential LLM steps:
+---
 
-| Step | What It Does | Output |
-|------|-------------|--------|
-| **Classify** | Identifies issue category & urgency | Category badge + color-coded urgency (Green/Orange/Red) |
-| **Generate Reply** | Writes a personalized customer email | Styled reply card with copy-to-clipboard |
-| **Escalation Check** | Decides if a human agent is needed | Green (no) or Red (yes) banner with reasoning |
+## 🛠️ How It Works
 
-**Hard Rule:** High urgency tickets are always auto-escalated, regardless of LLM decision.
+A support agent enters a customer query, and the app orchestrates three precise steps:
 
-Each step is visible on screen as it processes, and all completed tickets are saved in a session log.
+| Sequence | AI Action | Outcome/Display |
+| :---: | :--- | :--- |
+| **1** | **Classify Issue** | Tags it (`Billing`, `Technical`, etc.) & flags urgency (`🟢 Low`, `🟠 Medium`, `🔴 High`). |
+| **2** | **Generate Reply** | Drafts a 80-120 word personalized response, complete with a word-count validator and copy-to-clipboard button. |
+| **3** | **Check Escalation** | Determines if a human agent must intervene. High urgency triggers an **Auto-Escalate** lock. |
 
-## Project Structure
+---
 
-```
-src/
-├── App.js                        # Root component
-├── App.css                       # Design system & styles
-├── prompts.js                    # Prompt templates (named exports)
-├── hooks/
-│   └── useLLMWorkflow.js         # Custom hook — all LLM logic here
-├── components/
-│   ├── TicketForm.jsx            # Form with inline validation
-│   ├── WorkflowProgress.jsx      # 3-step progress tracker
-│   ├── ClassificationResult.jsx  # Category + urgency display
-│   ├── ReplyCard.jsx             # Reply + copy button + word count check
-│   ├── EscalationResult.jsx      # Escalation banner + override notice
-│   └── TicketLog.jsx             # Session history with expandable details
-```
+## 📸 Preview
 
-**Key rules followed:**
-- All LLM calls isolated in `useLLMWorkflow.js` — no API logic in components
-- All prompts in `prompts.js` — separated from business logic
-- Short, accurate comments throughout the codebase
+Here's how the Smart Support workflow looks in action:
 
-## Setup
+<p align="center">
+  <img src="docs/Smart%20Support%20Ticket.jpeg" alt="Smart Support Ticket Workflow Demo" width="850" />
+</p>
 
+---
+
+## 🚀 Installation & Setup
+
+**1. Clone the repository**
 ```bash
 git clone https://github.com/DivyModi07/smart-support-ticket-workflow.git
 cd smart-support-ticket-workflow
+```
+
+**2. Install dependencies**
+```bash
 npm install
 ```
 
-Create a `.env` file in the root:
-```
+**3. Set up the Environment Variable**
+Create a `.env` file in the root directory. Add your free OpenRouter API key:
+```env
 REACT_APP_OPENROUTER_API_KEY=your_openrouter_api_key_here
 ```
+*(Get a free API key at [OpenRouter.ai](https://openrouter.ai/))*
 
-Run the app:
+**4. Start the app**
 ```bash
 npm start
 ```
+Go to `http://localhost:3000` to start processing tickets!
 
-Get a free API key at [openrouter.ai](https://openrouter.ai/)
+---
+
+<p align="center">Built with ❤️ for modern customer support teams.</p>
